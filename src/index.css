@@ -1,0 +1,31 @@
+@import "tailwindcss";
+@theme {
+  --primary: hsl(211, 100%, 56%);
+  --secondary: 	hsl(210, 9%, 47%);
+  --success: hsl(152, 65%, 33%);
+  --danger: hsl(354, 70%, 53%);
+  --warning: hsl(45, 100%, 50%);
+  --info: 	hsl(191, 88%, 51%);
+  --light: hsl(210, 17%, 98%);
+  --dark: 	hsl(210, 11%, 15%);
+  --paddingX: 10px;
+  --paddingY: 5px;
+  --radius: 10px;
+  --gap: 10px;
+}
+input {
+  background-color: lightblue;
+  border-radius: 10px;
+  padding: 5px 10px;
+  border: none;
+  outline: none;
+}
+input:focus {
+  box-shadow: 0 0 0 4px #34b1eb;
+}
+body {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+.error-font-size {
+  font-size: 14px;
+}
