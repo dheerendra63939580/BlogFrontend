@@ -3,6 +3,7 @@ import Login from "./pages/Login"
 import { Route, Routes } from "react-router-dom"
 import Layout from "./pages/Layout"
 import BlogListing from "./pages/BlogListing"
+import { Toaster } from "sonner"
 
 function App() {
   
@@ -15,6 +16,7 @@ function App() {
         <Route path="/" element={<BlogListing />} />
       </Route>
     </Routes>
+    <Toaster position="top-right"/>
     </>
   )
 }
