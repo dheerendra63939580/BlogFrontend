@@ -9,3 +9,8 @@ export interface userLogin {
     email: string
     password: string
 }
+
+export interface SignInByGooglePayload {
+    data : { userToken: string },
+    endpoint: string
+}

@@ -4,9 +4,15 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useNavigate } from "react-router-dom";
 import LoginWithGoogle from "../components/LoginWithGoogle";
 import { signupSchema } from "../validations/validation";
+import { useEffect } from "react";
 
 function Signup() {
 
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if(token)
+      navigate("/")
+  }, [])
   const { register, handleSubmit, formState: {errors} } = useForm<userSignup>({resolver: yupResolver(signupSchema)});
   const navigate = useNavigate();
 
