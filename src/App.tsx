@@ -6,7 +6,7 @@ import BlogListing from "./pages/BlogListing"
 import { Toaster } from "sonner"
 
 function App() {
-  
+  console.log("check branch")
   return (
     <>
     <Routes>
