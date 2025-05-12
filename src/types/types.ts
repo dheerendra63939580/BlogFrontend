@@ -39,3 +39,7 @@ export interface PrfileResponse {
         sucess: boolean
     }
 }
+
+export interface CreateBlog {
+    content: string,
+}

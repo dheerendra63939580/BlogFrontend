@@ -1,5 +1,6 @@
 import axios, { AxiosError, type AxiosResponse, type InternalAxiosRequestConfig } from "axios"
-import type { SignInByGooglePayload } from "./types/types";
+import type { CreateBlog, SignInByGooglePayload } from "./types/types";
+import { UserEndPoint } from "./constant";
 const api = axios.create({
     baseURL: "http://localhost:3000/api/v1",
     timeout: 10*1000,
@@ -31,6 +32,11 @@ export const signInByGoogle = async (payload: SignInByGooglePayload) => {
 
 export const getProfile = async (endpoint: string) => {
     const res = await api.get(endpoint);
+    return res;
+}
+
+export const createBlog = async (payload: CreateBlog) => {
+    const res = await api.post(UserEndPoint.createBlogEndpoint, payload);
     return res;
 }
 

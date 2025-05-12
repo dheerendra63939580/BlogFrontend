@@ -1,9 +1,10 @@
 export const UserEndPoint: Record<
-  "signInByGoogle" | "getProfileEndpoint",
+  "signInByGoogle" | "getProfileEndpoint" | "createBlogEndpoint",
   string
 > = {
   signInByGoogle: "/user/sign-in-by-google",
   getProfileEndpoint: "/user/profile",
+  createBlogEndpoint: "/blog"
 };
 
 export const countryName: string[] = [
