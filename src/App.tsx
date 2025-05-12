@@ -4,19 +4,28 @@ import { Route, Routes } from "react-router-dom"
 import Layout from "./pages/Layout"
 import BlogListing from "./pages/BlogListing"
 import { Toaster } from "sonner"
+import { UserContextMyProvider } from "./context/userContext"
+import ProtectedRoute from "./pages/ProtectedRoute"
+import NewPost from "./pages/NewPost"
+
 
 function App() {
   console.log("check branch")
   return (
     <>
-    <Routes>
-      <Route path="/login" element={<Login />} />
-      <Route path="/signup" element={<Signup />} />
-      <Route path="/" element={<Layout />}>
-        <Route path="/" element={<BlogListing />} />
-      </Route>
-    </Routes>
-    <Toaster position="top-right"/>
+    <UserContextMyProvider>
+      <Routes>
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<Signup />} />
+        <Route path="/" element={<Layout />}>
+          <Route path="/" element={<BlogListing />} />
+        </Route>
+        <Route path="/" element={<ProtectedRoute />}>
+          <Route path="/create-post" element={<NewPost />} />
+        </Route>
+      </Routes>
+      <Toaster position="top-right"/>
+    </UserContextMyProvider>
     </>
   )
 }
