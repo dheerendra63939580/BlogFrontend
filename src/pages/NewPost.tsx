@@ -10,7 +10,7 @@ function NewPost() {
     mutationFn: createBlog,
     onSuccess: () => {
       // queryClient.invalidateQueries({ queryKey: ['todos'] })
-      console.log("")
+      setContent("")
     },
   })
     const [content, setContent] = useState("");
