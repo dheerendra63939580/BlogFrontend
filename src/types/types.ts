@@ -47,12 +47,13 @@ export interface CreateBlog {
 
 interface BlogObject {
     _id: string
-    content: string
+    title: string
     userId: {
         name: string
         createdAt: string
         updatedAt: string
         _id: string
+        avatar: string
     }
 }
 export interface BlogResponse {

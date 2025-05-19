@@ -12,7 +12,8 @@ function NewPost() {
     mutationFn: createBlog,
     onSuccess: () => {
       // queryClient.invalidateQueries({ queryKey: ['todos'] })
-      setContent("")
+      setContent("");
+      setTitle("")
     },
   })
   const [content, setContent] = useState("");
@@ -41,6 +42,7 @@ function NewPost() {
         value={content}
         onChange={setContent}
         className="mb-4"
+        placeholder="Write your content here..."
       />
       <button
         type="button"
