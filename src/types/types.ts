@@ -41,5 +41,22 @@ export interface PrfileResponse {
 }
 
 export interface CreateBlog {
-    content: string,
+    title: string
+    content: string
+}
+
+interface BlogObject {
+    _id: string
+    content: string
+    userId: {
+        name: string
+        createdAt: string
+        updatedAt: string
+        _id: string
+    }
+}
+export interface BlogResponse {
+    data: {blogs: BlogObject[]}
+    success: boolean
+    message: string
 }

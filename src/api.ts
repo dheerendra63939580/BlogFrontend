@@ -3,7 +3,7 @@ import type { CreateBlog, SignInByGooglePayload } from "./types/types";
 import { UserEndPoint } from "./constant";
 const api = axios.create({
     baseURL: "http://localhost:3000/api/v1",
-    timeout: 10*1000,
+    timeout: 100*1000,
 });
 
 api.interceptors.request.use( (config: InternalAxiosRequestConfig<any>):InternalAxiosRequestConfig<any> => {
@@ -36,7 +36,12 @@ export const getProfile = async (endpoint: string) => {
 }
 
 export const createBlog = async (payload: CreateBlog) => {
-    const res = await api.post(UserEndPoint.createBlogEndpoint, payload);
+    const res = await api.post(UserEndPoint.blogEndpoint, payload);
     return res;
+}
+
+export const getAllBlogs = async () => {
+    const res = await api.get(UserEndPoint.blogEndpoint);
+    return res.data;
 }
 

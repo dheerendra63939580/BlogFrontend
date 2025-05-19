@@ -15,6 +15,7 @@ function Navbar() {
   const {data, isSuccess} = useQuery<PrfileResponse, Error>({
     queryKey: ['userProfile'],
     queryFn: () => getProfile(UserEndPoint.getProfileEndpoint),
+    enabled: !!localStorage.getItem("token")
     });
   useEffect(() => {
     if(isSuccess)
