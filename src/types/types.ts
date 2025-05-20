@@ -52,7 +52,6 @@ interface BlogObject {
         name: string
         createdAt: string
         updatedAt: string
-        _id: string
         avatar: string
     }
 }
