@@ -20,7 +20,7 @@ function App() {
         <Route path="/signup" element={<Signup />} />
         <Route path="/" element={<Layout />}>
           <Route path="/" element={<BlogListing />} />
-          <Route path="/blog/:id" element={<BlogPage />} />
+          <Route path="/blog/:blogId" element={<BlogPage />} />
         </Route>
         <Route path="/" element={<ProtectedRoute />}>
           <Route path="/create-post" element={<NewPost />} />

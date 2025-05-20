@@ -45,9 +45,10 @@ export interface CreateBlog {
     content: string
 }
 
-interface BlogObject {
+export interface BlogObject {
     _id: string
     title: string
+    content?: string
     userId: {
         name: string
         createdAt: string
@@ -57,6 +58,12 @@ interface BlogObject {
 }
 export interface BlogResponse {
     data: {blogs: BlogObject[]}
+    success: boolean
+    message: string
+}
+
+export interface BlogByIdResponse {
+    data: BlogObject
     success: boolean
     message: string
 }

@@ -45,3 +45,8 @@ export const getAllBlogs = async () => {
     return res.data;
 }
 
+export const getBlogById = async (blogId: string) => {
+    const res = await api.get(`${UserEndPoint.blogEndpoint}/${blogId}`);
+    return res.data
+}
+
