@@ -12,6 +12,7 @@ interface MyProviderProps {
 
 export const UserContextMyProvider = ({ children }: MyProviderProps) => {
   const [userInfo, setUserInfo] = useState<UserData>({
+    _id: "",
     name: "",
     avatar: ""
   });

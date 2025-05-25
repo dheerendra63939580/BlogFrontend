@@ -1,13 +1,26 @@
-import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { useState } from 'react';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { useState, useEffect } from 'react';
 import ReactQuill from 'react-quill-new';
 import 'react-quill-new/dist/quill.snow.css';
-import { createBlog } from '../api';
+import { createBlog, getBlogById, updateBlog } from '../api';
 import { toast } from 'sonner';
+import { useParams } from 'react-router-dom';
+import type { BlogByIdResponse } from '../types/types';
 function NewPost() {
 
-  const [title, setTitle] = useState("")
+  const {blogId} = useParams();
   const queryClient = useQueryClient();
+  const { data, isPending, isFetching, isError, isSuccess } = useQuery<BlogByIdResponse, Error>({
+      queryKey: [`blgogById`, blogId],
+      queryFn: () => getBlogById(blogId!, true),
+      enabled: !!blogId,
+    })
+    useEffect(() => {
+  if (isSuccess && data) {
+    setContent(data?.data?.content);
+    setTitle(data?.data?.title || "")
+  }
+}, [isSuccess, data]);
   const newBlog = useMutation({
     mutationFn: createBlog,
     onSuccess: () => {
@@ -16,8 +29,17 @@ function NewPost() {
       setTitle("")
     },
   })
+
+  const updateBlogApi = useMutation({
+    mutationFn: updateBlog,
+    onSuccess: () => {
+      toast.success("Blog updated successfully")
+      queryClient.invalidateQueries({ queryKey: [`blgogById`, blogId] })
+    }
+  })
+
   const [content, setContent] = useState("");
-  console.log(content)
+  const [title, setTitle] = useState("")
   const handleNewBlog = () => {
     if(content.trim().length <= 50) {
       toast.error("Content should contain at least 51 character");
@@ -26,6 +48,10 @@ function NewPost() {
     if(title.length <= 9) {
       toast.error('Length should contain at least 10 characters');
       return;
+    }
+    if(blogId) {
+      updateBlogApi.mutate({title, content, blogId});
+      return
     }
     newBlog.mutate({ title,content })
   }

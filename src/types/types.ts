@@ -16,6 +16,7 @@ export interface SignInByGooglePayload {
 }
 
 export interface UserData {
+  _id: string
   name: string, 
   avatar: string
 }
@@ -49,7 +50,11 @@ export interface BlogObject {
     _id: string
     title: string
     content?: string
+    createdAt: string
+    updatedAt: string
+    likes: string[] | number
     userId: {
+        _id: string
         name: string
         createdAt: string
         updatedAt: string
@@ -66,4 +71,10 @@ export interface BlogByIdResponse {
     data: BlogObject
     success: boolean
     message: string
+}
+
+export interface UpdateBlogPayload {
+    userId: string
+    title: string
+    content: string
 }

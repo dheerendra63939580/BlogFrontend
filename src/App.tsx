@@ -24,6 +24,7 @@ function App() {
         </Route>
         <Route path="/" element={<ProtectedRoute />}>
           <Route path="/create-post" element={<NewPost />} />
+          <Route path="/update-blog/:blogId" element={<NewPost />} />
         </Route>
       </Routes>
       <Toaster position="top-right"/>

@@ -6,6 +6,7 @@ import { UserEndPoint } from "../constant";
 import type { PrfileResponse } from "../types/types";
 import { useEffect, useRef, useState, type RefObject } from "react";
 import { useOnClickOutside } from 'usehooks-ts'
+import defaultProfile from "../assets/defaultProfile.png"
 
 function Navbar() {
 
@@ -19,7 +20,7 @@ function Navbar() {
     });
   useEffect(() => {
     if(isSuccess)
-        setUserInfo((pre) => ({...pre, name: data?.data?.data?.name, avatar: data?.data?.data?.avatar}));
+        setUserInfo((pre) => ({...pre, name: data?.data?.data?.name, avatar: data?.data?.data?.avatar, _id: data?.data?.data?._id}));
     }, [data]);
     const handleLogout = () => {
         localStorage.removeItem("token");
@@ -49,7 +50,7 @@ function Navbar() {
             </div>
             {userInfo.name && 
                 <div className="relative cursor-pointer">
-                    <img src={userInfo.avatar} className="rounded-[50%] w-12 h-12" onClick={() => setOpen(!open)}  referrerPolicy="no-referrer"/>
+                    <img src={userInfo?.avatar || defaultProfile} className="rounded-[50%] w-12 h-12" onClick={() => setOpen(!open)}  referrerPolicy="no-referrer"/>
                     {open && <div className="bg-(--secondary) absolute right-0 -bottom-13 px-(--paddingX) py-(--paddingY) rounded-(--radius)" ref={outsideRef}>
                         <button onClick={handleLogout} className="bg-(--info) px-(--paddingX) py-(--paddingY) rounded-(--radius)"> Logout </button>
                     </div> }

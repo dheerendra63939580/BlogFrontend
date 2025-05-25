@@ -1,5 +1,5 @@
 import axios, { AxiosError, type AxiosResponse, type InternalAxiosRequestConfig } from "axios"
-import type { CreateBlog, SignInByGooglePayload } from "./types/types";
+import type { CreateBlog, SignInByGooglePayload, UpdateBlogPayload } from "./types/types";
 import { UserEndPoint } from "./constant";
 const api = axios.create({
     baseURL: "http://localhost:3000/api/v1",
@@ -45,8 +45,17 @@ export const getAllBlogs = async () => {
     return res.data;
 }
 
-export const getBlogById = async (blogId: string) => {
-    const res = await api.get(`${UserEndPoint.blogEndpoint}/${blogId}`);
+export const getBlogById = async (blogId: string, wantOnlyUserId?: boolean) => {
+    const res = await api.get(`${UserEndPoint.blogEndpoint}/${blogId}/${wantOnlyUserId}`);
     return res.data
 }
 
+export const updateBlog = async (blogUpdatePayload: UpdateBlogPayload) => {
+    const res = await api.patch(UserEndPoint.blogEndpoint, blogUpdatePayload);
+    return res.data;
+}
+
+export const handleLike = async (blogId: string) => {
+    const res = await api.patch(`${UserEndPoint.blogEndpoint}/like`, {blogId});
+    return res.data;
+}
