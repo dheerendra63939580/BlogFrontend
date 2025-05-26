@@ -64,7 +64,6 @@ function BlogPage() {
         <div className="flex justify-between">
           <span title="Comments" className="flex gap-(--gap)"><MessageCircle /> 0</span>
           <span title="Likes" className="flex gap-(--gap) items-center">
-            {ljdjdsjsdlkj}
             <ThumbsUp onClick={handleLikeClick} className={`${data.data.hasUserLiked && "fill-(--secondary)"} cursor-pointer`}/> {data.data.likesCount}
           </span>
         </div>
