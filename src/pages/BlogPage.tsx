@@ -35,7 +35,7 @@ function BlogPage() {
   })
 
   const handleLikeClick = () => {
-    likeMutation.mutate(blogId);
+    likeMutation.mutate(blogId!);
   }
 
   if (isPending) return <PageLoading />
@@ -55,7 +55,7 @@ function BlogPage() {
             className="rounded-[50%] h-13 w-13"
           />
           <div className="flex gap-(--gap) flex-col">
-            <span>{data?.data?.userId.name}</span>
+            <span>{data?.data?.userId?.name}</span>
             <span>Member since: {data?.data?.userId?.createdAt && format(data?.data?.userId?.createdAt, "d MMMM yyyy")}</span>
           </div>
         </div>
@@ -64,10 +64,11 @@ function BlogPage() {
         <div className="flex justify-between">
           <span title="Comments" className="flex gap-(--gap)"><MessageCircle /> 0</span>
           <span title="Likes" className="flex gap-(--gap) items-center">
-            <ThumbsUp onClick={handleLikeClick} className={`${data.data.likes.includes(userInfo._id) && "fill-(--secondary)"} cursor-pointer`}/> {data.data.likes.length}
+            {ljdjdsjsdlkj}
+            <ThumbsUp onClick={handleLikeClick} className={`${data.data.hasUserLiked && "fill-(--secondary)"} cursor-pointer`}/> {data.data.likesCount}
           </span>
         </div>
-        {userInfo._id === data.data.userId._id &&
+        {userInfo._id === data?.data?.userId?._id &&
           <div className="absolute right-(--paddingX) top-(--paddingY)">
             <div className="relative">
               <button onClick={(e) => { e.stopPropagation(); setIsAction(true) }}>

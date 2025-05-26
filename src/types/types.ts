@@ -52,7 +52,8 @@ export interface BlogObject {
     content?: string
     createdAt: string
     updatedAt: string
-    likes: string[] | number
+    likesCount: number
+    hasUserLiked: boolean
     userId: {
         _id: string
         name: string
