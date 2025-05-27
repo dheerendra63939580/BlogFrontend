@@ -25,7 +25,7 @@ export default function BlogCard({blogInfo}: BlogCardProps) {
     return (
         <div 
             className="bg-(--light) dark:bg-(--card-dark) dark:text-(--text-dark) px-(--paddingX) py-(--paddingY) rounded-(--radius) shadow-md hover:cursor-pointer hover:bg-(--info)
-            flex flex-col gap-(--gap) relative"
+            flex flex-col gap-(--gap) relative dark:hover:bg-(--secondary)"
             onClick={() => navigate(`/blog/${blogInfo._id}`)}
         >
             <div className="flex gap-(--gap) items-center">
