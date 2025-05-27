@@ -1,5 +1,5 @@
 import { NavLink } from "react-router-dom"
-import { useUserContext } from "../context/userContext"
+import { useUserContext } from "../context/UserContext"
 import { useQuery } from "@tanstack/react-query";
 import { getProfile } from "../api";
 import { UserEndPoint } from "../constant";
@@ -7,6 +7,7 @@ import type { PrfileResponse } from "../types/types";
 import { useEffect, useRef, useState, type RefObject } from "react";
 import { useOnClickOutside } from 'usehooks-ts'
 import defaultProfile from "../assets/defaultProfile.png"
+import ThemeSwitcher from "./ThemeSwitcher";
 
 function Navbar() {
 
@@ -56,6 +57,7 @@ function Navbar() {
                     </div> }
                 </div>
             }
+            <ThemeSwitcher />
         </div>
     </div>
   )

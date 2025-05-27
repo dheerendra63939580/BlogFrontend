@@ -5,7 +5,7 @@ import type { BlogObject } from "../types/types"
 import { format } from "date-fns"
 import { MessageCircle, ThumbsUp, EllipsisVertical, SquarePen, CircleX } from "lucide-react"
 import { useOnClickOutside } from 'usehooks-ts'
-import { useUserContext } from "../context/userContext"
+import { useUserContext } from "../context/UserContext"
 interface BlogCardProps {
     blogInfo: BlogObject
 }
@@ -24,7 +24,7 @@ export default function BlogCard({blogInfo}: BlogCardProps) {
 
     return (
         <div 
-            className="bg-(--light) px-(--paddingX) py-(--paddingY) rounded-(--radius) shadow-md hover:cursor-pointer hover:bg-(--info)
+            className="bg-(--light) dark:bg-(--card-dark) dark:text-(--text-dark) px-(--paddingX) py-(--paddingY) rounded-(--radius) shadow-md hover:cursor-pointer hover:bg-(--info)
             flex flex-col gap-(--gap) relative"
             onClick={() => navigate(`/blog/${blogInfo._id}`)}
         >

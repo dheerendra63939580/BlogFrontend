@@ -8,7 +8,7 @@ import ReactQuill from "react-quill-new";
 import { MessageCircle, ThumbsUp, EllipsisVertical, SquarePen, CircleX } from "lucide-react"
 import { useState, useRef, type RefObject } from "react"
 import { useOnClickOutside } from 'usehooks-ts'
-import { useUserContext } from "../context/userContext";
+import { useUserContext } from "../context/UserContext";
 import { PageLoading } from "../components/PageLoading"
 
 function BlogPage() {
@@ -43,7 +43,7 @@ function BlogPage() {
 
   return (
     <div
-      className="bg-(--light) px-(--paddingX) py-(--paddingY) rounded-(--radius) shadow-md
+      className="px-(--paddingX) py-(--paddingY) rounded-(--radius) shadow-md
       flex flex-col gap-(--gap)"
     >
       <div className="relative">
