@@ -33,7 +33,7 @@ function Navbar() {
   useOnClickOutside(outsideRef, handleClickOutside)
 
   return (
-    <div className="flex justify-between gap-2.5 border-b-2 border-(--secondary) px-(--paddingX) py-(--paddingY) mb-4">
+    <div className="flex justify-between items-center gap-2.5 border-b-2 border-(--secondary) px-(--paddingX) py-(--paddingY) mb-4">
         <h2 className="text-lg">Blog</h2>
         <div className="flex gap-2.5 items-center">
             {!userInfo.name &&

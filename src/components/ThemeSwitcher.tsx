@@ -15,6 +15,7 @@ const ThemeSwitcher: React.FC = () => {
 
   const handleThemeChange = (event) => {
     setTheme(event.target.value as 'light' | 'dark' | 'system');
+    setOpenTheme(false);
   };
   useOnClickOutside(outsideRef, () => setOpenTheme(false))
   return (
@@ -22,7 +23,7 @@ const ThemeSwitcher: React.FC = () => {
         {theme === "light" ? <Sun onClick={handleOpenTheme}/> : <Moon onClick={handleOpenTheme}/> }
         {openTheme && 
             <select onChange={handleThemeChange} value={theme} 
-                className="absolute right-0 top-10 px-(--paddingX) py-(--paddingY) rounded-(--radius) border cursor-pointer z-101" 
+                className="absolute right-0 top-11 px-(--paddingX) py-(--paddingY) rounded-(--radius) border cursor-pointer z-101" 
                 ref={outsideRef}
             >
                 <option value="light" className="dark:text-(--text-dark) dark:bg-(--background-dark)">Light</option>

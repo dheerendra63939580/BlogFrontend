@@ -60,7 +60,13 @@ function NewPost() {
     <>
       <div className="flex flex-col gap-(--gap) mb-2.5">
         <label htmlFor="title">Enter Title</label>
-        <input type="text" id="title" value={title} onChange={(e) => setTitle(e.target.value)} />
+        <input 
+          type="text" 
+          id="title" 
+          value={title} 
+          onChange={(e) => setTitle(e.target.value)} 
+          className="dark:bg-(--card-dark) bg-(--info)"
+        />
       </div>
 
       <ReactQuill

@@ -35,6 +35,10 @@ function BlogPage() {
   })
 
   const handleLikeClick = () => {
+    if(userInfo._id.length === 0) {
+      navigate("/login")
+      return;
+    }
     likeMutation.mutate(blogId!);
   }
 
@@ -63,9 +67,10 @@ function BlogPage() {
         <h1 className="text-lg">{data?.data?.title}</h1>
         <div className="flex justify-between">
           <span title="Comments" className="flex gap-(--gap)"><MessageCircle /> 0</span>
-          <span title="Likes" className="flex gap-(--gap) items-center">
-            <ThumbsUp onClick={handleLikeClick} className={`${data.data.hasUserLiked && "fill-(--secondary)"} cursor-pointer`}/> {data.data.likesCount}
-          </span>
+          <button title="Likes" className="flex gap-(--gap) items-center" disabled={!likeMutation.isSuccess}>
+            <ThumbsUp onClick={handleLikeClick} className={`${data.data.hasUserLiked && "fill-(--secondary)"} cursor-pointer`}/> 
+            {data.data.likesCount}
+          </button>
         </div>
         {userInfo._id === data?.data?.userId?._id &&
           <div className="absolute right-(--paddingX) top-(--paddingY)">

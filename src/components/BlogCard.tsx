@@ -44,7 +44,7 @@ export default function BlogCard({blogInfo}: BlogCardProps) {
             <h1 className="text-lg">{blogInfo.title}</h1>
             <div className="flex justify-between">
                 <span title="Comments" className="flex gap-(--gap)"><MessageCircle /> 0</span>
-                <span title="Likes" className="flex gap-(--gap)"><ThumbsUp /> 0</span>
+                <span title="Likes" className="flex gap-(--gap)"><ThumbsUp /> {blogInfo.likesCount}</span>
             </div>
             {userInfo._id === blogInfo.userId._id &&
                 <div className="absolute right-(--paddingX) top-(--paddingY)">
