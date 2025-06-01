@@ -18,13 +18,13 @@
   --background-dark: hsl(210, 11%, 8%); /* A common dark background */
   --text-dark: hsl(210, 17%, 90%); /* Light text for dark backgrounds */
 }
-input {
+input, select {
   border-radius: 10px;
   padding: 5px 10px;
   border: none;
   outline: none;
 }
-input:focus {
+input:focus, select:focus {
   box-shadow: 0 0 0 4px #34b1eb;
 }
 body {

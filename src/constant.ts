@@ -1,10 +1,12 @@
 export const UserEndPoint: Record<
-  "signInByGoogle" | "getProfileEndpoint" | "blogEndpoint",
+  "signInByGoogle" | "getProfileEndpoint" | "blogEndpoint" | "siginupEndpoint" | "loginEndpoint",
   string
 > = {
   signInByGoogle: "/user/sign-in-by-google",
   getProfileEndpoint: "/user/profile",
   blogEndpoint: "/blog",
+  siginupEndpoint: "/user/signup",
+  loginEndpoint: "/user/login"
 
 };
 

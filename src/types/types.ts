@@ -1,3 +1,8 @@
+interface BasicResponse {
+    success: boolean
+    message: string
+}
+
 export interface userSignup {
     name: string
     email: string
@@ -75,7 +80,28 @@ export interface BlogByIdResponse {
 }
 
 export interface UpdateBlogPayload {
-    userId: string
+    blogId: string
     title: string
     content: string
+}
+
+export interface DeleteBlogResponse {
+    success: boolean,
+    message: string
+}
+
+export interface LoginPayloadType {
+    email: string
+    password: string
+}
+
+export interface RegisterUser extends LoginPayloadType {
+    name: string
+    country: string
+}
+
+export interface LoginResponse extends BasicResponse {
+    data: {
+        token: string
+    }
 }

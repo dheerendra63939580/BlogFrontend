@@ -1,22 +1,24 @@
 import { useNavigate } from "react-router-dom"
-import { useState, useRef, type RefObject } from "react"
+import { useState, useRef } from "react"
 import defaultProfile from "../assets/defaultProfile.png"
 import type { BlogObject } from "../types/types"
 import { format } from "date-fns"
-import { MessageCircle, ThumbsUp, EllipsisVertical, SquarePen, CircleX } from "lucide-react"
+import { ThumbsUp, EllipsisVertical, SquarePen, CircleX } from "lucide-react"
 import { useOnClickOutside } from 'usehooks-ts'
 import { useUserContext } from "../context/UserContext"
+import { useDeleteBlog } from "../customHooks"
 interface BlogCardProps {
     blogInfo: BlogObject
 }
 
 export default function BlogCard({blogInfo}: BlogCardProps) {
 
+    const {handleDelete, isPending} = useDeleteBlog();
     const {userInfo} = useUserContext();
-    console.log("userid from", userInfo)
+    console.log("userid from", userInfo);
     const navigate = useNavigate();
     const [isAction, setIsAction] = useState(false);
-    const actionRef = useRef<RefObject<HTMLElement> | RefObject<HTMLElement>[]>(null);
+    const actionRef = useRef(null);
     const handleClickOutside = () => {
         setIsAction(false)
     }
@@ -43,7 +45,7 @@ export default function BlogCard({blogInfo}: BlogCardProps) {
             <div>Published At: {blogInfo?.createdAt ? format(blogInfo?.createdAt, "d MMMM yyyy, h:mm a") : "---"}</div>
             <h1 className="text-lg">{blogInfo.title}</h1>
             <div className="flex justify-between">
-                <span title="Comments" className="flex gap-(--gap)"><MessageCircle /> 0</span>
+                {/* <span title="Comments" className="flex gap-(--gap)"><MessageCircle /> 0</span> */}
                 <span title="Likes" className="flex gap-(--gap)"><ThumbsUp /> {blogInfo.likesCount}</span>
             </div>
             {userInfo._id === blogInfo.userId._id &&
@@ -60,9 +62,9 @@ export default function BlogCard({blogInfo}: BlogCardProps) {
                                 <button type="button" onClick={(e) => {e.stopPropagation(); navigate(`update-blog/${blogInfo._id}`)}}>
                                     <SquarePen className="text-(--info)"/>
                                 </button>
-                                <span>
+                                <button onClick={(e) => {e.stopPropagation(); handleDelete(blogInfo._id)}} disabled={isPending}>
                                     <CircleX className="text-red-500"/>
-                                </span>
+                                </button>
                             </div>
                         }
                     </div>

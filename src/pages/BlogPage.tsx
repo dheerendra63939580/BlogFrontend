@@ -5,20 +5,22 @@ import type { BlogByIdResponse } from "../types/types";
 import defaultProfile from "../assets/defaultProfile.png"
 import { format } from "date-fns";
 import ReactQuill from "react-quill-new";
-import { MessageCircle, ThumbsUp, EllipsisVertical, SquarePen, CircleX } from "lucide-react"
-import { useState, useRef, type RefObject } from "react"
+import { ThumbsUp, EllipsisVertical, SquarePen, CircleX } from "lucide-react"
+import { useState, useRef } from "react"
 import { useOnClickOutside } from 'usehooks-ts'
 import { useUserContext } from "../context/UserContext";
 import { PageLoading } from "../components/PageLoading"
+import { useDeleteBlog } from "../customHooks";
 
 function BlogPage() {
 
   const {userInfo} = useUserContext();
+  const {handleDelete, isPending: isDeleting} = useDeleteBlog(true)
   const navigate = useNavigate()
   const { blogId } = useParams();
   const queryClient = useQueryClient();
   const [isAction, setIsAction] = useState(false);
-  const actionRef = useRef<RefObject<HTMLElement> | RefObject<HTMLElement>[]>(null);
+  const actionRef = useRef(null);
   const { data, isPending, isError } = useQuery<BlogByIdResponse, Error>({
     queryKey: [`blgogById`, blogId],
     queryFn: () => getBlogById(blogId!, false) 
@@ -66,8 +68,8 @@ function BlogPage() {
         <div>Published At: {data?.data?.createdAt ? format(data?.data?.createdAt, "d MMMM yyyy, h:mm a") : "---"}</div>
         <h1 className="text-lg">{data?.data?.title}</h1>
         <div className="flex justify-between">
-          <span title="Comments" className="flex gap-(--gap)"><MessageCircle /> 0</span>
-          <button title="Likes" className="flex gap-(--gap) items-center" disabled={!likeMutation.isSuccess}>
+          {/* <span title="Comments" className="flex gap-(--gap)"><MessageCircle /> 0</span> */}
+          <button title="Likes" className="flex gap-(--gap) items-center" disabled={likeMutation.isPending}>
             <ThumbsUp onClick={handleLikeClick} className={`${data.data.hasUserLiked && "fill-(--secondary)"} cursor-pointer`}/> 
             {data.data.likesCount}
           </button>
@@ -80,15 +82,15 @@ function BlogPage() {
               </button>
               {isAction &&
                 <div
-                  className="absolute top-0 right-0 bg-(--warning) px-(--paddingX) py-(--paddingY) rounded-(--radius)"
+                  className="absolute top-0 right-0 bg-(--light) px-(--paddingX) py-(--paddingY) rounded-(--radius)"
                   ref={actionRef}
                 >
                   <button onClick={() => navigate(`/update-blog/${blogId}`)}>
                     <SquarePen className="text-(--info)" />
                   </button>
-                  <span>
+                  <button onClick={() => handleDelete(blogId!)} disabled={isDeleting}>
                     <CircleX className="text-red-500" />
-                  </span>
+                  </button>
                 </div>
               }
             </div>

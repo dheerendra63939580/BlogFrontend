@@ -1,5 +1,5 @@
 import axios, { AxiosError, type AxiosResponse, type InternalAxiosRequestConfig } from "axios"
-import type { CreateBlog, SignInByGooglePayload, UpdateBlogPayload } from "./types/types";
+import type { CreateBlog, LoginPayloadType, RegisterUser, SignInByGooglePayload, UpdateBlogPayload } from "./types/types";
 import { UserEndPoint } from "./constant";
 const api = axios.create({
     baseURL: "http://localhost:3000/api/v1",
@@ -20,6 +20,8 @@ api.interceptors.response.use(
         localStorage.removeItem("token");
         if(window.location.pathname  !== "/")
             window.location.href = "/"
+        else
+            window.location.reload()
     }
     return Promise.reject(error);
   }
@@ -57,5 +59,20 @@ export const updateBlog = async (blogUpdatePayload: UpdateBlogPayload) => {
 
 export const handleLike = async (blogId: string) => {
     const res = await api.patch(`${UserEndPoint.blogEndpoint}/like`, {blogId});
+    return res.data;
+}
+
+export const deleteBlog = async (blogId: string) => {
+    const res = await api.delete(`${UserEndPoint.blogEndpoint}/${blogId}`);
+    return res.data;
+}
+
+export const registerUser = async (signupPayload: RegisterUser) => {
+    const res = await api.post(UserEndPoint.siginupEndpoint, signupPayload);
+    return res.data;
+}
+
+export const loginUser = async (loginPayload: LoginPayloadType) => {
+    const res = await api.post(UserEndPoint.loginEndpoint, loginPayload);
     return res.data;
 }
