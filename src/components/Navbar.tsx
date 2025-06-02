@@ -4,14 +4,14 @@ import { useQuery } from "@tanstack/react-query";
 import { getProfile } from "../api";
 import { UserEndPoint } from "../constant";
 import type { PrfileResponse } from "../types/types";
-import { useEffect, useRef, useState, type RefObject } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useOnClickOutside } from 'usehooks-ts'
 import defaultProfile from "../assets/defaultProfile.png"
 import ThemeSwitcher from "./ThemeSwitcher";
 
 function Navbar() {
 
-  const outsideRef = useRef<RefObject<HTMLElement> | RefObject<HTMLElement>[]>(null)
+  const outsideRef = useRef(null)
   const [open, setOpen] = useState(false);
   const {userInfo, setUserInfo} = useUserContext();
   const {data, isSuccess} = useQuery<PrfileResponse, Error>({
