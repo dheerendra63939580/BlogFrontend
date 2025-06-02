@@ -1,20 +1,40 @@
 import { useForm } from "react-hook-form";
-import type { userSignup } from "../types/types";
+import type { RegisterUser as RegisterUserType, userSignup } from "../types/types";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useNavigate } from "react-router-dom";
 import LoginWithGoogle from "../components/LoginWithGoogle";
 import { signupSchema } from "../validations/validation";
+import { useEffect } from "react";
+import { countryName } from "../constant";
+import { useMutation } from "@tanstack/react-query";
+import { registerUser } from "../api";
+import { toast } from "sonner";
 
 function Signup() {
 
   const { register, handleSubmit, formState: {errors} } = useForm<userSignup>({resolver: yupResolver(signupSchema)});
   const navigate = useNavigate();
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if(token)
+      navigate("/")
+  }, []);
+  const registerUserMutation = useMutation({
+    mutationFn: registerUser,
+    onSuccess: (data) => {
+      toast.success(data?.message);
+      navigate("/login")
+    },
+    onError: (err) => {
+      toast.error(err.message);
+    }
+  });
 
   return (
     <div className="bg-(--secondary) flex flex-col justify-center items-center h-screen">
       <div className="bg-(--light) rounded-(--radius) px-20 py-10">
         <form
-          onSubmit={handleSubmit((data) => console.log(data))}
+          onSubmit={handleSubmit((data: RegisterUserType) => registerUserMutation.mutate(data))}
           className="flex flex-col gap-(--gap)"
         >
           <h1 className="m-auto text-2xl">Sign up</h1>
@@ -43,11 +63,12 @@ function Signup() {
             {errors.password && <span className="text-(--danger) error-font-size">* {errors.password.message}</span>}
           </div>
           <div className="flex flex-col mb-2">
-            <input
-              type="text"
-              {...register("country")}
-              placeholder="Enter country"
-            />
+            <select {...register("country")}>
+              <option value="">Select Country</option>
+              {countryName.map((name) => (
+                <option value={name} key={name}>{name}</option>
+              ))}
+            </select>
             {errors.country && <span className="text-(--danger) error-font-size">* {errors.country.message}</span>}
           </div>
           <button

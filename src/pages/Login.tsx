@@ -1,19 +1,40 @@
 import { useForm } from "react-hook-form";
-import type { userLogin } from "../types/types";
+import type { LoginPayloadType, LoginResponse, userLogin } from "../types/types";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { loginSchema } from "../validations/validation";
 import { useNavigate } from "react-router-dom";
 import LoginWithGoogle from "../components/LoginWithGoogle";
+import { useEffect } from "react";
+import { useMutation } from "@tanstack/react-query";
+import { loginUser } from "../api";
+import { toast } from "sonner";
 
 function Login() {
+
   const navigate = useNavigate()
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if(token)
+      navigate("/")
+  }, [])
   const { register, handleSubmit, formState: {errors} } = useForm<userLogin>({resolver: yupResolver(loginSchema)});
+  const userLoginMutation = useMutation<LoginResponse, Error, LoginPayloadType>({
+    mutationFn: loginUser,
+    onSuccess: function (data) {
+      toast.success(data?.message || "Logged in successfully");
+      localStorage.setItem("token", data.data.token)
+      navigate("/")
+    },
+    onError: function (err) {
+      toast.error(err?.message || "Something went wrong");
+    }
+  })
 
   return (
     <div className="bg-(--secondary) flex flex-col justify-center items-center h-screen">
       <div className="bg-(--light) rounded-(--radius) px-20 py-10">
         <form
-          onSubmit={handleSubmit((data) => console.log(data))}
+          onSubmit={handleSubmit((data) => userLoginMutation.mutate(data))}
           className="flex flex-col gap-(--gap)"
         >
           <h1 className="m-auto text-2xl">Log in</h1>
