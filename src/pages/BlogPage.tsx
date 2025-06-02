@@ -103,6 +103,7 @@ function BlogPage() {
         value={data.data.content}
         readOnly={true}
         theme="bubble"
+        className="ql-editor"
       />
     </div>
   )

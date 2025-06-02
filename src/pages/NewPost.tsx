@@ -6,25 +6,27 @@ import { createBlog, getBlogById, updateBlog } from '../api';
 import { toast } from 'sonner';
 import { useParams } from 'react-router-dom';
 import type { BlogByIdResponse } from '../types/types';
+import { Loading } from '../components/ButtonLoading';
 function NewPost() {
 
   const {blogId} = useParams();
   const queryClient = useQueryClient();
-  const { data, isPending, isFetching, isError, isSuccess } = useQuery<BlogByIdResponse, Error>({
+  const { data, isPending,isSuccess } = useQuery<BlogByIdResponse, Error>({
       queryKey: [`blgogById`, blogId],
       queryFn: () => getBlogById(blogId!, true),
       enabled: !!blogId,
     })
     useEffect(() => {
-  if (isSuccess && data) {
-    setContent(data?.data?.content);
-    setTitle(data?.data?.title || "")
-  }
+      if (isSuccess && data) {
+        setContent(data?.data?.content || "");
+        setTitle(data?.data?.title || "")
+      }
 }, [isSuccess, data]);
   const newBlog = useMutation({
     mutationFn: createBlog,
     onSuccess: () => {
-      // queryClient.invalidateQueries({ queryKey: ['todos'] })
+      toast.success('blog created successfully')
+      queryClient.invalidateQueries({ queryKey: ['allBlogs'] })
       setContent("");
       setTitle("")
     },
@@ -65,7 +67,7 @@ function NewPost() {
           id="title" 
           value={title} 
           onChange={(e) => setTitle(e.target.value)} 
-          className="dark:bg-(--card-dark) bg-(--info)"
+          className="dark:bg-(--card-dark) bg-gray-300"
         />
       </div>
 
@@ -78,10 +80,11 @@ function NewPost() {
       />
       <button
         type="button"
-        className='bg-(--primary) p-(--paddingX) py-(--paddingY) rounded-(--radius) cursor-pointer hover:text-white'
+        className='bg-(--primary) p-(--paddingX) py-(--paddingY) rounded-(--radius) cursor-pointer hover:text-white min-w-24'
         onClick={handleNewBlog}
+        disabled={newBlog.isPending}
       >
-        SUBMIT
+      {newBlog.isPending ? <Loading /> : "SUBMIT"}
       </button>
     </>
   )
