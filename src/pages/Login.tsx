@@ -8,6 +8,7 @@ import { useEffect } from "react";
 import { useMutation } from "@tanstack/react-query";
 import { loginUser } from "../api";
 import { toast } from "sonner";
+import { Loading } from "../components/ButtonLoading";
 
 function Login() {
 
@@ -57,8 +58,9 @@ function Login() {
           <button
             type="submit"
             className="bg-(--success) px-(--paddingX) py-(--paddingY) rounded-(--radius) cursor-pointer outline-none"
+            disabled={userLoginMutation.isPending}
           >
-            SUBMIT
+            {userLoginMutation.isPending ? <Loading/> : "SUBMIT"}
           </button>
         </form>
         <div className="mt-4 flex flex-col gap-4">

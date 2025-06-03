@@ -82,9 +82,9 @@ function NewPost() {
         type="button"
         className='bg-(--primary) p-(--paddingX) py-(--paddingY) rounded-(--radius) cursor-pointer hover:text-white min-w-24'
         onClick={handleNewBlog}
-        disabled={newBlog.isPending}
+        disabled={newBlog.isPending || updateBlogApi.isPending}
       >
-      {newBlog.isPending ? <Loading /> : "SUBMIT"}
+      {newBlog.isPending || updateBlogApi.isPending ? <Loading /> : "SUBMIT"}
       </button>
     </>
   )

@@ -9,6 +9,7 @@ import { countryName } from "../constant";
 import { useMutation } from "@tanstack/react-query";
 import { registerUser } from "../api";
 import { toast } from "sonner";
+import  { Loading } from "../components/ButtonLoading";
 
 function Signup() {
 
@@ -74,8 +75,9 @@ function Signup() {
           <button
             type="submit"
             className="bg-(--success) px-(--paddingX) py-(--paddingY) rounded-(--radius) cursor-pointer outline-none"
+            disabled={registerUserMutation.isPending}
           >
-            SUBMIT
+            {registerUserMutation.isPending ? <Loading /> : "SUBMIT"}
           </button>
         </form>
         <div className="mt-4 flex flex-col gap-4">
