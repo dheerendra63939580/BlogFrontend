@@ -30,7 +30,7 @@ function Navbar() {
     const handleClickOutside = () => {
         setOpen(false)
   }
-  useOnClickOutside(outsideRef, handleClickOutside)
+  useOnClickOutside(outsideRef as unknown as React.RefObject<HTMLElement>, handleClickOutside)
 
   return (
     <div className="flex justify-between items-center gap-2.5 border-b-2 border-(--secondary) px-(--paddingX) py-(--paddingY) mb-4">
