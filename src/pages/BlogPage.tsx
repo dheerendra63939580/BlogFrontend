@@ -28,7 +28,7 @@ function BlogPage() {
   const handleClickOutside = () => {
     setIsAction(false)
   }
-  useOnClickOutside(actionRef, handleClickOutside)
+  useOnClickOutside(actionRef  as unknown as React.RefObject<HTMLElement>, handleClickOutside)
   const likeMutation = useMutation({
     mutationFn: handleLike,
     onSuccess: () => {

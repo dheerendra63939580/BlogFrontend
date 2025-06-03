@@ -13,16 +13,16 @@ const ThemeSwitcher: React.FC = () => {
     setOpenTheme(true)
   }
 
-  const handleThemeChange = (event) => {
+  const handleThemeChange = (event:  React.ChangeEvent<HTMLSelectElement>) => {
     setTheme(event.target.value as 'light' | 'dark' | 'system');
     setOpenTheme(false);
   };
-  useOnClickOutside(outsideRef, () => setOpenTheme(false))
+  useOnClickOutside(outsideRef as unknown as React.RefObject<HTMLElement>, () => setOpenTheme(false))
   return (
     <div className="relative">
         {theme === "light" ? <Sun onClick={handleOpenTheme}/> : <Moon onClick={handleOpenTheme}/> }
         {openTheme && 
-            <select onChange={handleThemeChange} value={theme} 
+            <select onChange={(e) => handleThemeChange(e)} value={theme} 
                 className="absolute right-0 top-11 px-(--paddingX) py-(--paddingY) rounded-(--radius) border cursor-pointer z-101" 
                 ref={outsideRef}
             >

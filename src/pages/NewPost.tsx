@@ -11,7 +11,7 @@ function NewPost() {
 
   const {blogId} = useParams();
   const queryClient = useQueryClient();
-  const { data, isPending,isSuccess } = useQuery<BlogByIdResponse, Error>({
+  const { data, isSuccess } = useQuery<BlogByIdResponse, Error>({
       queryKey: [`blgogById`, blogId],
       queryFn: () => getBlogById(blogId!, true),
       enabled: !!blogId,
