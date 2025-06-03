@@ -22,7 +22,8 @@ export default function BlogCard({blogInfo}: BlogCardProps) {
     const handleClickOutside = () => {
         setIsAction(false)
     }
-    useOnClickOutside(actionRef, handleClickOutside)
+
+    useOnClickOutside(actionRef as unknown as React.RefObject<HTMLElement>, handleClickOutside)
 
     return (
         <div 
