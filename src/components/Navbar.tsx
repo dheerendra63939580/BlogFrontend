@@ -1,4 +1,4 @@
-import { NavLink } from "react-router-dom"
+import { NavLink, useNavigate } from "react-router-dom"
 import { useUserContext } from "../context/UserContext"
 import { useQuery } from "@tanstack/react-query";
 import { getProfile } from "../api";
@@ -10,7 +10,7 @@ import defaultProfile from "../assets/defaultProfile.png"
 import ThemeSwitcher from "./ThemeSwitcher";
 
 function Navbar() {
-
+  const navigate = useNavigate()
   const outsideRef = useRef(null)
   const [open, setOpen] = useState(false);
   const {userInfo, setUserInfo} = useUserContext();
@@ -25,7 +25,8 @@ function Navbar() {
     }, [data]);
     const handleLogout = () => {
         localStorage.removeItem("token");
-        setUserInfo((pre) => ({...pre, name: "", avatar: ""}))
+        setUserInfo((pre) => ({...pre, name: "", avatar: ""}));
+        navigate("/")
     }
     const handleClickOutside = () => {
         setOpen(false)
