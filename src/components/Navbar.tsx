@@ -51,7 +51,7 @@ function Navbar() {
                 <NavLink to="/create-post">Write Blog</NavLink>
             </div>
             {userInfo.name && 
-                <div className="relative cursor-pointer">
+                <div className="relative cursor-pointer z-50">
                     <img src={userInfo?.avatar || defaultProfile} className="rounded-[50%] w-12 h-12" onClick={() => setOpen(!open)}  referrerPolicy="no-referrer"/>
                     {open && <div className="bg-(--secondary) absolute right-0 -bottom-13 px-(--paddingX) py-(--paddingY) rounded-(--radius)" ref={outsideRef}>
                         <button onClick={handleLogout} className="bg-(--info) px-(--paddingX) py-(--paddingY) rounded-(--radius)"> Logout </button>
