@@ -59,6 +59,7 @@ export default function BlogCard({blogInfo}: BlogCardProps) {
                             <div 
                                 className="absolute top-0 right-0 bg-white px-(--paddingX) py-(--paddingY) rounded-(--radius)"
                                 ref={actionRef}
+                                onClick={(e) => e.stopPropagation()}
                                 >
                                 <button type="button" onClick={(e) => {e.stopPropagation(); navigate(`update-blog/${blogInfo._id}`)}}>
                                     <SquarePen className="text-(--info)"/>

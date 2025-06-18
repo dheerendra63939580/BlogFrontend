@@ -34,20 +34,20 @@ function Navbar() {
   useOnClickOutside(outsideRef as unknown as React.RefObject<HTMLElement>, handleClickOutside)
 
   return (
-    <div className="flex justify-between items-center gap-2.5 border-b-2 border-(--secondary) px-(--paddingX) py-(--paddingY) mb-4">
-        <h2 className="text-lg">Blog</h2>
-        <div className="flex gap-2.5 items-center">
+    <div className="flex justify-between items-center gap-2.5 border-b-2 border-(--secondary) sm:px-(--paddingX) sm:py-(--paddingY) mb-4">
+        <h2 className="text-lg cursor-pointer" onClick={() => navigate("/")}>Blog</h2>
+        <div className="flex sm:gap-2.5 items-center gap-.5">
             {!userInfo.name &&
             <>
-                <div className="hover:bg-(--info) px-(--paddingX) py-(paddingY) rounded-(--radius)">
+                <div className="hover:bg-(--info) p-0.5 sm:px-(--paddingX) sm:py-(paddingY) rounded-(--radius) text-nowrap">
                     <NavLink to="/signup">Sign up</NavLink>
                 </div>
-                <div className="hover:bg-(--info) px-(--paddingX) py-(paddingY) rounded-(--radius)">
+                <div className="hover:bg-(--info) p-1 sm:px-(--paddingX) sm:py-(paddingY) rounded-(--radius) text-nowrap">
                     <NavLink to="/login">Log in</NavLink>
                 </div>
             </> 
             }
-            <div className="hover:bg-(--info) px-(--paddingX) py-(paddingY) rounded-(--radius)">
+            <div className="hover:bg-(--info) p-1 sm:px-(--paddingX) sm:py-(paddingY) rounded-(--radius) text-nowrap">
                 <NavLink to="/create-post">Write Blog</NavLink>
             </div>
             {userInfo.name && 
