@@ -11,9 +11,10 @@ import { useOnClickOutside } from 'usehooks-ts'
 import { useUserContext } from "../context/UserContext";
 import { PageLoading } from "../components/PageLoading"
 import { useDeleteBlog } from "../customHooks";
+import { useTheme } from "../context/ThemeContext";
 
 function BlogPage() {
-
+  const theme = useTheme()
   const {userInfo} = useUserContext();
   const {handleDelete, isPending: isDeleting} = useDeleteBlog(true)
   const navigate = useNavigate()
@@ -99,12 +100,14 @@ function BlogPage() {
         }
       </div>
       <hr />
-      <ReactQuill
-        value={data.data.content}
-        readOnly={true}
-        theme="bubble"
-        className="ql-editor"
-      />
+      <div className={theme.theme === "dark" ? "quill-background" : ""}>
+        <ReactQuill
+          value={data.data.content}
+          readOnly={true}
+          theme="bubble"
+          className="ql-editor"
+        />
+      </div>
     </div>
   )
 }

@@ -54,4 +54,8 @@ button {
 
 .ql-editor ol {
   padding-left: 1.5rem;
+} 
+.quill-background * {
+  background: none !important;
+  color: white !important;
 }
