@@ -16,7 +16,7 @@ export interface userLogin {
 }
 
 export interface SignInByGooglePayload {
-    data : { userToken: string },
+    data : { userToken: string, country?: string }
     endpoint: string
 }
 
@@ -65,6 +65,7 @@ export interface BlogObject {
         createdAt: string
         updatedAt: string
         avatar: string
+        country?: string
     }
 }
 export interface BlogResponse {

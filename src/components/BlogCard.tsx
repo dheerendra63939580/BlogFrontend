@@ -39,7 +39,7 @@ export default function BlogCard({blogInfo}: BlogCardProps) {
                     className="rounded-[50%] h-13 w-13"
                 />
                 <div className="flex gap-(--gap) flex-col">
-                <span>{blogInfo.userId.name}</span>
+                <span>{blogInfo.userId.name} {blogInfo.userId.country?.length ? `, ${blogInfo.userId.country}` : null}</span>
                 <span>Member since: {format(blogInfo.userId.createdAt, "d MMMM yyyy")}</span>
                 </div>
             </div>

@@ -26,7 +26,8 @@ function Navbar() {
     const handleLogout = () => {
         localStorage.removeItem("token");
         setUserInfo((pre) => ({...pre, name: "", avatar: ""}));
-        navigate("/")
+        window.location.reload();
+        navigate("/");
     }
     const handleClickOutside = () => {
         setOpen(false)

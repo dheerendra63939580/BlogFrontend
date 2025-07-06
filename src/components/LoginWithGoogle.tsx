@@ -5,20 +5,18 @@ import { signInByGoogle } from "../api";
 import type { SignInByGooglePayload, SignInResponse } from "../types/types";
 import { useNavigate } from "react-router-dom";
 import { UserEndPoint } from "../constant";
+import { useSignWithGoogle } from "../hooks/useSignWithGoogle";
+interface LoginWithGoogleProps {
+  handleUserToken?: (token: string) => void;
+}
+function LoginWithGoogle({handleUserToken}: LoginWithGoogleProps) {
 
-function LoginWithGoogle() {
-
-  const navigate = useNavigate()
-  const signInMutation = useMutation<SignInResponse, Error, SignInByGooglePayload>({
-    mutationFn: signInByGoogle,
-    onSuccess: (data) => {
-      console.log("success", data?.data);
-      localStorage.setItem("token", data?.data?.data?.token)
-      toast.success(data?.data?.message || "User logged in successfully")
-      navigate("/")
-    },
-  })
+  const {signInMutation} = useSignWithGoogle()
   const handleLogin = (credentials: CredentialResponse ) => {
+    if(handleUserToken) {
+      handleUserToken(credentials?.credential || "");
+      return ;
+    }
     signInMutation.mutate({
       endpoint: UserEndPoint.signInByGoogle, 
       data: {userToken: credentials.credential || ""}
