@@ -62,7 +62,7 @@ function BlogPage() {
             className="rounded-[50%] h-13 w-13"
           />
           <div className="flex gap-(--gap) flex-col">
-            <span>{data?.data?.userId?.name}</span>
+            <span>{data?.data?.userId?.name} {data.data.userId.country?.length ? `, ${data.data.userId.country}` : null}</span>
             <span>Member since: {data?.data?.userId?.createdAt && format(data?.data?.userId?.createdAt, "d MMMM yyyy")}</span>
           </div>
         </div>
