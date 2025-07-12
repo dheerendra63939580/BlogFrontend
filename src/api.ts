@@ -2,7 +2,7 @@ import axios, { AxiosError, type AxiosResponse, type InternalAxiosRequestConfig 
 import type { CreateBlog, LoginPayloadType, RegisterUser, SignInByGooglePayload, UpdateBlogPayload } from "./types/types";
 import { UserEndPoint } from "./constant";
 const api = axios.create({
-    baseURL: "http://localhost:3000/api/v1",  //"https://blogbackend-njk4.onrender.com/api/v1",
+    baseURL: import.meta.env.VITE_API_BASE_URL,
     timeout: 100*1000,
 });
 

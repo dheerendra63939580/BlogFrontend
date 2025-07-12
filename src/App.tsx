@@ -14,7 +14,7 @@ import { ThemeProvider } from "./context/ThemeContext"
 
 
 function App() {
-  console.log("check branch")
+
   return (
     <>
     <ErrorBoundary fallback={<div>Something went wrong</div>}>

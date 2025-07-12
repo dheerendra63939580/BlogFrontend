@@ -34,12 +34,12 @@ function BlogListing() {
         Blog per page:
         <select value={blogsPerPage} onChange={(e) => setBlogsPerPage(+e.target.value)}>
           {Array.from({ length: 4 }, (_, index: number) => (index + 1) * 5).map((value, ind) => (
-            <option value={value} key={ind} selected={ind === 0} className="dark:bg-(--background-dark)">{value}</option>
+            <option value={value} key={ind} className="dark:bg-(--background-dark)">{value}</option>
           ))}
         </select>
       </label>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-(--gap)">
-        {data?.data.blogs.map((blogInfo) => (
+        {data?.data?.blogs?.map((blogInfo) => (
           <BlogCard
             key={blogInfo._id}
             blogInfo={blogInfo}
