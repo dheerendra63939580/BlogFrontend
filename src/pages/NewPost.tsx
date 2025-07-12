@@ -61,8 +61,9 @@ function NewPost() {
   return (
     <>
       <div className="flex flex-col gap-(--gap) mb-2.5">
-        <label htmlFor="title">Enter Title</label>
+        <label htmlFor="title">Title</label>
         <input 
+          placeholder='Enter title'
           type="text" 
           id="title" 
           value={title} 

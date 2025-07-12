@@ -69,7 +69,7 @@ export interface BlogObject {
     }
 }
 export interface BlogResponse {
-    data: {blogs: BlogObject[]}
+    data: {blogs: BlogObject[], total?: number}
     success: boolean
     message: string
 }
