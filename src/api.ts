@@ -2,7 +2,7 @@ import axios, { AxiosError, type AxiosResponse, type InternalAxiosRequestConfig 
 import type { CreateBlog, LoginPayloadType, RegisterUser, SignInByGooglePayload, UpdateBlogPayload } from "./types/types";
 import { UserEndPoint } from "./constant";
 const api = axios.create({
-    baseURL: "https://blogbackend-njk4.onrender.com/api/v1",
+    baseURL: "http://localhost:3000/api/v1",  //"https://blogbackend-njk4.onrender.com/api/v1",
     timeout: 100*1000,
 });
 
@@ -42,8 +42,8 @@ export const createBlog = async (payload: CreateBlog) => {
     return res;
 }
 
-export const getAllBlogs = async () => {
-    const res = await api.get(UserEndPoint.blogEndpoint);
+export const getAllBlogs = async (page: number, blogsPerPage: number) => {
+    const res = await api.get(`${UserEndPoint.blogEndpoint}?limit=${blogsPerPage}&page=${page}`);
     return res.data;
 }
 

@@ -4,10 +4,15 @@ import type { SignInByGooglePayload, SignInResponse } from "../types/types";
 import { signInByGoogle } from "../api";
 import { toast } from "sonner";
 
+interface ApiError {
+  response: {
+    data: {message: string}
+  }
+}
 export function useSignWithGoogle() {
 
     const navigate = useNavigate()
-  const signInMutation = useMutation<SignInResponse, Error, SignInByGooglePayload>({
+    const signInMutation = useMutation<SignInResponse, ApiError, SignInByGooglePayload>({
     mutationFn: signInByGoogle,
     onSuccess: (data) => {
       console.log("success", data?.data);
@@ -15,6 +20,10 @@ export function useSignWithGoogle() {
       toast.success(data?.data?.message || "User logged in successfully")
       navigate("/")
     },
+    onError: (err) => {
+      console.log(err)
+      toast.error(err?.response?.data?.message)
+    }
   });
   return {signInMutation}
 }
