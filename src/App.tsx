@@ -14,7 +14,7 @@ import { ThemeProvider } from "./context/ThemeContext"
 
 
 function App() {
-  console.log("check branch")
+  console.log(import.meta.env.VITE_API_BASE_URL)
   return (
     <>
     <ErrorBoundary fallback={<div>Something went wrong</div>}>
