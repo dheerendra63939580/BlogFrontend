@@ -1,8 +1,10 @@
 import axios, { AxiosError, type AxiosResponse, type InternalAxiosRequestConfig } from "axios"
 import type { CreateBlog, LoginPayloadType, RegisterUser, SignInByGooglePayload, UpdateBlogPayload } from "./types/types";
 import { UserEndPoint } from "./constant";
+const baseURL = import.meta.env.VITE_API_BASE_URL
+console.log(baseURL)
 const api = axios.create({
-    baseURL: "https://blogbackend-njk4.onrender.com/api/v1",
+    baseURL,
     timeout: 100*1000,
 });
 
